@@ -484,9 +484,9 @@ else:
         def updated(*args, **kwargs):
             original = f(*args, **kwargs)
             def newdecorator(view):
-                return decorator.new_wrapper(original(view), view)
-            return decorator.new_wrapper(newdecorator, original)
-        return decorator.new_wrapper(updated, f)
+                return decorator.update_wrapper(original(view), view)
+            return decorator.update_wrapper(newdecorator, original)
+        return decorator.update_wrapper(updated, f)
     require_oauth = updater(require_oauth)
     process_oauth = updater(process_oauth)
     require_login = updater(require_login)

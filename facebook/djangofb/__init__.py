@@ -227,7 +227,7 @@ def require_oauth(redirect_path=None, keep_state=True, in_canvas=True,
                         keep_state, required_permissions)
     
                 return view(request, *args, **kwargs)
-            except facebook.FacebookError, e:
+            except facebook.FacebookError as e:
                 # Invalid token (I think this can happen if the user logs out)
                 # Unfortunately we don't find this out until we use the api 
                 if e.code == 190:
@@ -484,9 +484,9 @@ else:
         def updated(*args, **kwargs):
             original = f(*args, **kwargs)
             def newdecorator(view):
-                return decorator.update_wrapper(original(view), view)
-            return decorator.update_wrapper(newdecorator, original)
-        return decorator.update_wrapper(updated, f)
+                return decorator.new_wrapper(original(view), view)
+            return decorator.new_wrapper(newdecorator, original)
+        return decorator.new_wrapper(updated, f)
     require_oauth = updater(require_oauth)
     process_oauth = updater(process_oauth)
     require_login = updater(require_login)

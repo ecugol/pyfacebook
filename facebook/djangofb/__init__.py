@@ -475,7 +475,7 @@ def require_add(next=None, internal=None, on_install=None):
 
 # try to preserve the argspecs
 try:
-    import decorator
+    import django.utils.functional as decorator
 except ImportError:
     pass
 else:
